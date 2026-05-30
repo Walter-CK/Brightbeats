@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.thebrightbeats.com.au/sitemap.xml
+Sitemap: https://brightbeats.walterck.com/sitemap.xml
