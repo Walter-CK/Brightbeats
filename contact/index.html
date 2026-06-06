@@ -1,192 +1,245 @@
 <!doctype html>
 <html lang="en-AU">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Quote | Bright Beats</title>
-    <meta name="description" content="Request a Bright Beats event production quote for sound, lighting, DJ, LED screen, stage decoration, photography and videography.">
-    <meta property="og:title" content="Request a Bright Beats Quote">
-    <meta property="og:description" content="Send event details for a Bright Beats sound, lighting, DJ, screen, stage and media quote.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://brightbeats.walterck.com/contact/">
-    <link rel="canonical" href="https://brightbeats.walterck.com/contact/">
-    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
-    <script src="../script.js" defer></script>
-  </head>
-  <body data-page="contact">
-    <div id="cursor-glow" aria-hidden="true"></div>
-    <header class="site-header">
-      <div class="container">
-        <a class="brand" href="../" aria-label="Bright Beats home">
-          <img src="../assets/images/logo-96.jpg" alt="" width="48" height="48">
-          <span>
-            <strong>Bright Beats</strong>
-            <small>Event production</small>
-          </span>
-        </a>
-        <nav class="site-nav" aria-label="Primary navigation">
-          <a href="../services/">Services</a>
-          <a href="../gallery/">Gallery</a>
-          <a href="../about/">About</a>
-          <a href="../contact/#quote" aria-current="page">Quote</a>
-        </nav>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Bright Beats</title>
+  <meta name="description" content="Get a quote for Bright Beats event production. Call, email or fill out the quick quote form for Brisbane events.">
+  <meta property="og:title" content="Contact Bright Beats">
+  <meta property="og:url" content="https://brightbeats.walterck.com/contact/">
+  <link rel="canonical" href="https://brightbeats.walterck.com/contact/">
+  <link rel="icon" href="../images/logo-square.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="shell nav-inner">
+      <a class="nav-logo" href="/">
+        <img src="../images/logo-wide.png" alt="Bright Beats" loading="eager">
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/services/">Services</a>
+        <a href="/gallery/">Gallery</a>
+        <a href="/about/">About</a>
+        <a href="/contact/" class="nav-cta">Get a Quote</a>
       </div>
-    </header>
+      <button class="nav-hamburger" id="navHam" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
 
-    <main>
-      <section class="page-hero">
-        <div class="container page-hero-grid">
-          <div class="reveal">
-            <p class="eyebrow">Request a quote</p>
-            <h1>Send the details that shape your event setup.</h1>
-            <p>Share your date, venue, guest count and must-have services. The form opens your email app with a ready-to-send quote request.</p>
-          </div>
-          <a class="back-home" href="../">Back to home</a>
+  <main>
+
+    <section class="page-hero">
+      <div class="page-hero-bg">
+        <!-- Event planning / people talking at a venue -->
+        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=1920&q=80&auto=format&fit=crop" alt="" width="1920" height="1080" loading="eager">
+      </div>
+      <div class="shell page-hero-content">
+        <a href="/" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back to Home
+        </a>
+        <span class="eyebrow" style="margin-top:1.75rem; display:block;">Contact &amp; Quotes</span>
+        <h1>Tell Us About<br><span class="accent-gold">Your Event</span></h1>
+        <p>Call directly, email us or fill out the quote form below. We'll come back with a custom production plan and pricing for your night.</p>
+      </div>
+    </section>
+
+    <!-- QUICK STATS -->
+    <section class="section section-tight">
+      <div class="shell grid-3">
+        <div class="stat-card reveal" style="--delay:0ms">
+          <span>Response Time</span>
+          <strong>Fast</strong>
+          <p>We aim to respond to every enquiry within 24 hours on business days.</p>
         </div>
-      </section>
+        <div class="stat-card reveal" style="--delay:80ms">
+          <span>Quote Model</span>
+          <strong>Custom</strong>
+          <p>Pricing is shaped to your date, venue, guest count and service mix.</p>
+        </div>
+        <div class="stat-card reveal" style="--delay:160ms">
+          <span>Limited Offer</span>
+          <strong>Free Photos</strong>
+          <p>Ask about complimentary raw photography with the first two light and sound bookings.</p>
+        </div>
+      </div>
+    </section>
 
-      <section class="section" aria-labelledby="quote">
-        <div class="container quote-layout">
-          <div class="contact-stack">
-            <article class="contact-card featured tilt-card reveal">
-              <p class="eyebrow">Primary contact</p>
-              <h3>Suneesh Thomas</h3>
-              <a class="button button-primary" href="tel:0432094916">Call 0432 094 916</a>
-            </article>
-            <article class="contact-card tilt-card reveal">
-              <p class="eyebrow">Email</p>
-              <h3>Written briefs</h3>
-              <p>Send run sheets, access notes, screen content and service lists.</p>
-              <a class="button button-secondary" href="mailto:thebrightbeats@gmail.com">Email Bright Beats</a>
-            </article>
-            <article class="contact-card tilt-card reveal">
-              <p class="eyebrow">Social</p>
-              <h3>Follow and message</h3>
-              <div class="social-row">
-                <a class="social-link" href="https://www.instagram.com/thebrightbeats/" aria-label="Bright Beats Instagram">
-                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
-                  Instagram
-                </a>
-                <a class="social-link" href="https://www.facebook.com/profile.php?id=61575428434276" aria-label="Bright Beats Facebook">
-                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.6.4-1 1-1Z" fill="currentColor"/></svg>
-                  Facebook
-                </a>
-              </div>
-            </article>
+    <div class="section-strip"></div>
+
+    <!-- CONTACT + FORM -->
+    <section class="section" style="padding-top:2rem" id="quote">
+      <div class="shell contact-grid">
+
+        <!-- Left: contact cards -->
+        <div class="contact-info">
+          <div class="contact-card reveal" style="--delay:0ms">
+            <div class="label">Primary Contact</div>
+            <h3>Suneesh Thomas</h3>
+            <a href="tel:0432094916" class="contact-phone">0432 094 916</a>
+            <a href="tel:0432094916" class="btn btn-primary btn-sm">Call Now</a>
           </div>
+          <div class="contact-card reveal" style="--delay:80ms">
+            <div class="label">Event Enquiries</div>
+            <h3>Francis Nithish</h3>
+            <a href="tel:0423775336" class="btn btn-outline btn-sm">Call 0423 775 336</a>
+          </div>
+          <div class="contact-card reveal" style="--delay:160ms">
+            <div class="label">Production Enquiries</div>
+            <h3>Renjith Nair</h3>
+            <a href="tel:0481513738" class="btn btn-outline btn-sm">Call 0481 513 738</a>
+          </div>
+          <div class="contact-card reveal" style="--delay:240ms">
+            <div class="label">Email</div>
+            <h3>Written Briefs &amp; Run Sheets</h3>
+            <a href="mailto:thebrightbeats@gmail.com">thebrightbeats@gmail.com</a>
+          </div>
+          <div class="contact-card reveal" style="--delay:280ms">
+            <div class="label">Social</div>
+            <h3>Follow &amp; Message Us</h3>
+            <div class="social-links" style="margin-top:0.75rem;">
+              <a href="https://www.instagram.com/thebrightbeats/" class="social-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+                Instagram
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61575428434276" class="social-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v8h4v-8h3l1-4h-4V9c0-.6.4-1 1-1Z"/></svg>
+                Facebook
+              </a>
+            </div>
+          </div>
+        </div>
 
-          <form id="quote" class="quote-form reveal" aria-label="Bright Beats quote request form">
-            <p class="eyebrow">Event brief</p>
-            <h2>Build an email quote request.</h2>
+        <!-- Right: quote form -->
+        <div class="quote-form reveal" style="--delay:60ms">
+          <span class="eyebrow">Quick Quote Builder</span>
+          <h2>Get a Quote in<br><span class="accent-gold">Under a Minute</span></h2>
+          <p>Fill in the details below. Submitting opens your email app with a pre-built message ready to send — works on every device.</p>
+          <form id="quoteForm" novalidate>
             <div class="form-grid">
-              <label>
-                Name
-                <input name="name" type="text" autocomplete="name" placeholder="Your name">
-              </label>
-              <label>
-                Phone
-                <input name="phone" type="tel" autocomplete="tel" placeholder="Your phone number">
-              </label>
-              <label>
-                Email
-                <input name="email" type="email" autocomplete="email" placeholder="you@example.com">
-              </label>
-              <label>
-                Event type
-                <select name="eventType">
+              <div class="form-field">
+                <label for="name">Your Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" placeholder="e.g. Jane Smith" required>
+              </div>
+              <div class="form-field">
+                <label for="phone">Phone Number</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 0400 000 000">
+              </div>
+              <div class="form-field">
+                <label for="eventType">Event Type</label>
+                <select id="eventType" name="eventType">
                   <option>Wedding or reception</option>
                   <option>Birthday party</option>
-                  <option>Private celebration</option>
+                  <option>Private event</option>
                   <option>Corporate event</option>
                   <option>Community program</option>
                   <option>Live music or DJ event</option>
                   <option>Outdoor function</option>
                   <option>Other event</option>
                 </select>
-              </label>
-              <label>
-                Event date
-                <input name="eventDate" type="date">
-              </label>
-              <label>
-                Location
-                <input name="location" type="text" placeholder="Suburb or venue">
-              </label>
-              <label>
-                Guest count
-                <input name="guests" type="number" min="1" placeholder="Approx. guests">
-              </label>
-              <label>
-                Budget range
-                <select name="budget">
-                  <option>Need guidance</option>
-                  <option>Compact setup</option>
-                  <option>Mid-size celebration</option>
-                  <option>Full production</option>
+              </div>
+              <div class="form-field">
+                <label for="eventDate">Event Date</label>
+                <input id="eventDate" name="eventDate" type="date">
+              </div>
+              <div class="form-field">
+                <label for="location">Venue / Suburb</label>
+                <input id="location" name="location" type="text" placeholder="e.g. Sunnybank Hills, The Greek Club">
+              </div>
+              <div class="form-field">
+                <label for="guests">Approx. Guest Count</label>
+                <input id="guests" name="guests" type="number" min="1" placeholder="e.g. 150">
+              </div>
+              <div class="form-field">
+                <label for="budget">Budget Range</label>
+                <select id="budget" name="budget">
+                  <option>Need package guidance</option>
+                  <option>Compact event setup</option>
+                  <option>Mid-size private event</option>
+                  <option>Premium full production</option>
                 </select>
-              </label>
+              </div>
+              <div class="form-field">
+                <label for="contactMethod">Best Way to Reach You</label>
+                <select id="contactMethod" name="contactMethod">
+                  <option>Email</option>
+                  <option>Phone call</option>
+                  <option>SMS</option>
+                  <option>Facebook message</option>
+                </select>
+              </div>
             </div>
 
-            <fieldset>
-              <legend>Services needed</legend>
+            <fieldset class="form-services">
+              <legend>Services Needed</legend>
               <div class="checkbox-grid">
                 <label><input type="checkbox" name="services" value="Sound"> Sound</label>
                 <label><input type="checkbox" name="services" value="Lighting"> Lighting</label>
                 <label><input type="checkbox" name="services" value="DJ"> DJ</label>
-                <label><input type="checkbox" name="services" value="LED screen"> LED screen</label>
-                <label><input type="checkbox" name="services" value="Stage decoration"> Stage decoration</label>
-                <label><input type="checkbox" name="services" value="Photo/video"> Photo/video</label>
-                <label><input type="checkbox" name="services" value="Catering support"> Catering support</label>
-                <label><input type="checkbox" name="services" value="Event management"> Event management</label>
+                <label><input type="checkbox" name="services" value="LED screen"> LED Screen</label>
+                <label><input type="checkbox" name="services" value="Stage decoration"> Stage Decoration</label>
+                <label><input type="checkbox" name="services" value="Photography/Video"> Photo / Video</label>
+                <label><input type="checkbox" name="services" value="Catering"> Catering</label>
+                <label><input type="checkbox" name="services" value="Event management"> Event Management</label>
               </div>
             </fieldset>
 
-            <label>
-              Notes
-              <textarea name="notes" rows="5" placeholder="Access times, parking, power, run sheet, must-play songs, screen content, stage look or photo/video needs."></textarea>
-            </label>
+            <div class="form-field" style="margin-top:1.25rem;">
+              <label for="notes">Additional Notes</label>
+              <textarea id="notes" name="notes" placeholder="Run sheet, must-have songs, screen content, stage look, access requirements — anything useful."></textarea>
+            </div>
 
-            <button class="button button-primary" type="submit">Email quote request</button>
-            <p>The button opens your email app with these details pre-filled. You can review before sending.</p>
+            <div class="form-submit-row">
+              <button type="submit" class="btn btn-primary">Send Quote Request</button>
+              <p class="form-note">Clicking submit opens your email app with the brief pre-filled.</p>
+            </div>
           </form>
         </div>
-      </section>
-    </main>
 
-    <footer class="site-footer">
-      <div class="container footer-main">
-        <a class="brand" href="../" aria-label="Bright Beats home">
-          <img src="../assets/images/logo-96.jpg" alt="" width="48" height="48" loading="lazy">
-          <span>
-            <strong>Bright Beats</strong>
-            <small>Sound | Light | DJ | Media</small>
-          </span>
-        </a>
-        <div class="footer-contact">
-          <div class="footer-links" aria-label="Footer navigation">
-            <a href="../services/">Services</a>
-            <a href="../gallery/">Gallery</a>
-            <a href="../about/">About</a>
-            <a href="../contact/">Contact</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo-wrap">
+            <img src="../images/logo-wide.png" alt="Bright Beats" loading="lazy">
           </div>
-          <div class="footer-social" aria-label="Social links">
-            <a href="https://www.instagram.com/thebrightbeats/">
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
-              Instagram
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61575428434276">
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.6.4-1 1-1Z" fill="currentColor"/></svg>
-              Facebook
-            </a>
-          </div>
+          <p class="footer-tagline">Premium event production for Brisbane.</p>
+          <nav class="footer-nav" aria-label="Footer navigation">
+            <a href="/">Home</a>
+            <a href="/services/">Services</a>
+            <a href="/gallery/">Gallery</a>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+          </nav>
+        </div>
+        <div class="footer-right">
           <a href="tel:0432094916">0432 094 916</a>
           <a href="mailto:thebrightbeats@gmail.com">thebrightbeats@gmail.com</a>
+          <a href="https://www.instagram.com/thebrightbeats/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61575428434276" target="_blank" rel="noopener">Facebook</a>
         </div>
       </div>
-    </footer>
-  </body>
+      <div class="footer-bottom">
+        <p>© 2025 Bright Beats. Brisbane, QLD.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js" defer></script>
+</body>
 </html>

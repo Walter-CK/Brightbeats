@@ -1,120 +1,226 @@
+/* ============================================================
+   Bright Beats — script.js
+   Ambient canvas · 3D tilt · nav · reveals · lightbox · form
+   ============================================================ */
+
 (function () {
-  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  function initCursorGlow() {
-    const glow = document.getElementById("cursor-glow");
-    if (!glow || !finePointer || reduceMotion) return;
+  /* ── Ambient Canvas (gold/orange sparks) ── */
+  if (!reducedMotion) {
+    const cvs = document.getElementById('ambient-canvas');
+    if (cvs) {
+      const ctx = cvs.getContext('2d');
+      let w = 0, h = 0;
 
-    let targetX = -999;
-    let targetY = -999;
-    let glowX = targetX;
-    let glowY = targetY;
+      function resize() {
+        w = cvs.width  = window.innerWidth;
+        h = cvs.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
 
-    document.addEventListener("mousemove", (event) => {
-      targetX = event.clientX;
-      targetY = event.clientY;
-      document.body.classList.add("cursor-ready");
-    }, { passive: true });
+      const N = Math.min(45, Math.floor(window.innerWidth / 26));
+      // Colors from brand palette
+      const colors = [
+        'rgba(245,192,39,',   // gold
+        'rgba(232,96,10,',    // orange
+        'rgba(245,192,39,',   // more gold
+      ];
 
-    document.addEventListener("mouseleave", () => {
-      document.body.classList.remove("cursor-ready");
-    });
+      const particles = [];
+      for (let i = 0; i < N; i++) {
+        particles.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          r: Math.random() * 1.2 + 0.3,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: (Math.random() - 0.5) * 0.18,
+          a: Math.random() * 0.4 + 0.08,
+          phase: Math.random() * Math.PI * 2,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
 
-    function animate() {
-      glowX += (targetX - glowX) * 0.12;
-      glowY += (targetY - glowY) * 0.12;
-      glow.style.left = `${glowX}px`;
-      glow.style.top = `${glowY}px`;
-      requestAnimationFrame(animate);
+      let t = 0;
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        t += 0.007;
+        for (const p of particles) {
+          p.x = (p.x + p.vx + w) % w;
+          p.y = (p.y + p.vy + h) % h;
+          const pulse = 0.55 + 0.45 * Math.sin(t + p.phase);
+          ctx.fillStyle = p.color + (p.a * pulse) + ')';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Connecting lines
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 100) {
+              ctx.globalAlpha = (1 - d / 100) * 0.06;
+              ctx.strokeStyle = 'rgba(245,192,39,0.5)';
+              ctx.lineWidth = 0.6;
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+  }
+
+  /* ── 3D Card Tilt ── */
+  if (hasFinePointer && !reducedMotion) {
+    function attachTilt(el) {
+      if (el.dataset.tilt) return;
+      el.dataset.tilt = '1';
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        const mag = el.classList.contains('service-card') ? 6 : 4;
+        el.style.transform = `perspective(700px) rotateY(${(x * mag).toFixed(2)}deg) rotateX(${(-y * mag).toFixed(2)}deg) translateY(-4px)`;
+      });
+      el.addEventListener('pointerleave', () => {
+        el.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        el.style.transform = '';
+        setTimeout(() => { if (!el.matches(':hover')) el.style.transition = ''; }, 500);
+      });
+      el.addEventListener('pointerenter', () => {
+        el.style.transition = 'transform 0.1s ease-out';
+      });
     }
 
-    requestAnimationFrame(animate);
+    function initTilts() {
+      document.querySelectorAll('.card, .service-card, .package-card, .stat-card, .brief-card, .team-card').forEach(attachTilt);
+    }
+    initTilts();
+    new MutationObserver(records => {
+      records.forEach(r => r.addedNodes.forEach(n => {
+        if (n instanceof Element) n.querySelectorAll?.('.card, .service-card, .package-card, .stat-card, .brief-card, .team-card').forEach(attachTilt);
+      }));
+    }).observe(document.body, { childList: true, subtree: true });
   }
 
-  function initTiltCards() {
-    if (!finePointer || reduceMotion) return;
-
-    document.querySelectorAll(".tilt-card").forEach((card) => {
-      card.addEventListener("mouseenter", () => {
-        card.style.transition = "transform 120ms ease-out";
+  /* ── Scroll Reveals ── */
+  if (!reducedMotion) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
       });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
-      card.addEventListener("mousemove", (event) => {
-        const rect = card.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-        const rotateY = x * 7;
-        const rotateX = -y * 7;
-        card.style.transform = `perspective(700px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
-      });
+    function observeReveals(root = document) {
+      root.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }
+    observeReveals();
+    new MutationObserver(r => r.forEach(rec => rec.addedNodes.forEach(n => {
+      if (n instanceof Element) observeReveals(n);
+    }))).observe(document.body, { childList: true, subtree: true });
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
 
-      card.addEventListener("mouseleave", () => {
-        card.style.transition = "transform 420ms cubic-bezier(0.22, 1, 0.36, 1)";
-        card.style.transform = "";
-      });
+  /* ── Nav ── */
+  const nav  = document.querySelector('.site-nav');
+  const ham  = document.querySelector('.nav-hamburger');
+  const navL = document.querySelector('.nav-links');
+
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 24);
+    }, { passive: true });
+  }
+
+  if (ham && navL) {
+    ham.addEventListener('click', () => {
+      const open = ham.getAttribute('aria-expanded') === 'true';
+      ham.setAttribute('aria-expanded', String(!open));
+      navL.classList.toggle('open', !open);
     });
+    navL.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      ham.setAttribute('aria-expanded', 'false');
+      navL.classList.remove('open');
+    }));
   }
 
-  function initTouchReveals() {
-    if (finePointer || reduceMotion) return;
+  // Active nav link
+  const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    const href = (a.getAttribute('href') || '').replace(/\/$/, '') || '/';
+    if (href === currentPath || (href !== '/' && href !== '' && currentPath.includes(href))) {
+      a.classList.add('active');
+    }
+  });
 
-    document.body.classList.add("touch-motion");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.14, rootMargin: "0px 0px -42px 0px" });
+  /* ── Lightbox ── */
+  const lightbox = document.querySelector('.lightbox');
+  const lbImg    = lightbox?.querySelector('img');
+  const lbClose  = lightbox?.querySelector('.lightbox-close');
 
-    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+  if (lightbox && lbImg) {
+    function openLb(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      lightbox.hidden = true;
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('[data-lightbox]').forEach(el => {
+      el.addEventListener('click', () => openLb(el.dataset.lightbox, el.dataset.alt));
+      el.style.cursor = 'pointer';
+    });
+    lbClose?.addEventListener('click', closeLb);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLb(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !lightbox.hidden) closeLb(); });
   }
 
-  function initQuoteForm() {
-    const form = document.querySelector(".quote-form");
-    if (!form) return;
-
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const data = new FormData(form);
-      const services = data.getAll("services");
-      const subject = encodeURIComponent("Bright Beats event quote request");
-      const bodyParts = [
-        "Hi Bright Beats,",
-        "",
-        "I would like a quote for an event.",
-        "",
-        data.get("name") ? `Name: ${data.get("name")}` : "",
-        data.get("phone") ? `Phone: ${data.get("phone")}` : "",
-        data.get("email") ? `Email: ${data.get("email")}` : "",
-        data.get("eventType") ? `Event type: ${data.get("eventType")}` : "",
-        data.get("eventDate") ? `Event date: ${data.get("eventDate")}` : "",
-        data.get("location") ? `Location: ${data.get("location")}` : "",
-        data.get("guests") ? `Guest count: ${data.get("guests")}` : "",
-        services.length ? `Services needed: ${services.join(", ")}` : "",
-        data.get("budget") ? `Budget range: ${data.get("budget")}` : "",
-        data.get("notes") ? `Notes: ${data.get("notes")}` : "",
-        "",
-        "Thank you."
-      ].filter((line) => line !== "");
-
-      const body = encodeURIComponent(bodyParts.join("\n"));
+  /* ── Contact Form → mailto ── */
+  const form = document.getElementById('quoteForm');
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const services = d.getAll('services');
+      const lines = [
+        `Hi Bright Beats, I'd like to get a quote for an upcoming event.`,
+        ``,
+        `Name: ${d.get('name') || '—'}`,
+        `Phone: ${d.get('phone') || '—'}`,
+        `Event type: ${d.get('eventType') || '—'}`,
+        `Date: ${d.get('eventDate') || '—'}`,
+        `Location: ${d.get('location') || '—'}`,
+        `Guest count: ${d.get('guests') || '—'}`,
+        `Budget range: ${d.get('budget') || '—'}`,
+        `Services needed: ${services.length ? services.join(', ') : '—'}`,
+        `Best contact method: ${d.get('contactMethod') || '—'}`,
+        ``,
+        `Additional notes:`,
+        d.get('notes') || '—'
+      ];
+      const subject = encodeURIComponent(`Bright Beats Event Quote — ${d.get('eventType') || 'Enquiry'}`);
+      const body    = encodeURIComponent(lines.join('\n'));
       window.location.href = `mailto:thebrightbeats@gmail.com?subject=${subject}&body=${body}`;
     });
   }
 
-  function boot() {
-    initCursorGlow();
-    initTiltCards();
-    initTouchReveals();
-    initQuoteForm();
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot, { once: true });
-  } else {
-    boot();
-  }
 })();

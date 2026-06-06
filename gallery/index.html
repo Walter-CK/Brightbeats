@@ -1,166 +1,200 @@
 <!doctype html>
 <html lang="en-AU">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gallery | Bright Beats</title>
-    <meta name="description" content="See Bright Beats event visuals, lighting, DJ setups, stage decoration and photography examples.">
-    <meta property="og:title" content="Bright Beats Gallery">
-    <meta property="og:description" content="Lighting, DJ energy, stage detail and event media from Bright Beats.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://brightbeats.walterck.com/gallery/">
-    <link rel="canonical" href="https://brightbeats.walterck.com/gallery/">
-    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
-    <script src="../script.js" defer></script>
-  </head>
-  <body data-page="gallery">
-    <div id="cursor-glow" aria-hidden="true"></div>
-    <header class="site-header">
-      <div class="container">
-        <a class="brand" href="../" aria-label="Bright Beats home">
-          <img src="../assets/images/logo-96.jpg" alt="" width="48" height="48">
-          <span>
-            <strong>Bright Beats</strong>
-            <small>Event production</small>
-          </span>
-        </a>
-        <nav class="site-nav" aria-label="Primary navigation">
-          <a href="../services/">Services</a>
-          <a href="../gallery/" aria-current="page">Gallery</a>
-          <a href="../about/">About</a>
-          <a href="../contact/#quote">Quote</a>
-        </nav>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery | Bright Beats</title>
+  <meta name="description" content="Bright Beats event visuals — lighting, DJ setups, stage decoration and photography from real events.">
+  <meta property="og:title" content="Bright Beats Gallery">
+  <meta property="og:url" content="https://brightbeats.walterck.com/gallery/">
+  <link rel="canonical" href="https://brightbeats.walterck.com/gallery/">
+  <link rel="icon" href="../images/logo-square.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="shell nav-inner">
+      <a class="nav-logo" href="/">
+        <img src="../images/logo-wide.png" alt="Bright Beats" loading="eager">
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/services/">Services</a>
+        <a href="/gallery/">Gallery</a>
+        <a href="/about/">About</a>
+        <a href="/contact/" class="nav-cta">Get a Quote</a>
       </div>
-    </header>
+      <button class="nav-hamburger" id="navHam" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
 
-    <main>
-      <section class="page-hero">
-        <div class="container page-hero-grid">
-          <div class="reveal">
-            <p class="eyebrow">Gallery</p>
-            <h1>Event atmosphere you can picture before booking.</h1>
-            <p>Browse lighting, DJ setups, stage details and Bright Beats service visuals.</p>
-          </div>
-          <a class="back-home" href="../">Back to home</a>
-        </div>
-      </section>
+  <main>
 
-      <section class="section" aria-labelledby="gallery-title">
-        <div class="container">
-          <div class="section-heading reveal">
-            <div>
-              <p class="eyebrow">Visuals</p>
-              <h2 id="gallery-title">Sound, light, stage and media.</h2>
-            </div>
-            <p>Use these references to describe the mood, scale and finish you want for your event.</p>
-          </div>
-          <div class="gallery-grid">
-            <figure class="gallery-card wide tilt-card reveal">
-              <img src="../assets/images/fb-01.jpg" alt="Bright Beats full service advertisement" width="851" height="315" loading="lazy">
-              <figcaption>
-                <h3>Full service mix</h3>
-                <p>Sound, lighting, DJ, LED screen, stage decoration, photography and videography.</p>
-              </figcaption>
-            </figure>
-            <figure class="gallery-card tall tilt-card reveal">
-              <img src="../assets/images/fb-05.jpg" alt="Bright Beats limited time light and sound offer" width="526" height="942" loading="lazy">
-              <figcaption>
-                <h3>Light and sound offer</h3>
-                <p>Ask about the raw-photo bonus when booking eligible packages.</p>
-              </figcaption>
-            </figure>
-            <figure class="gallery-card tilt-card reveal">
-              <img src="../assets/images/fb-09.jpg" alt="DJ controller and event lighting setup" width="1215" height="2160" loading="lazy">
-              <figcaption>
-                <h3>DJ setup</h3>
-                <p>Music control and lighting for dance-floor energy.</p>
-              </figcaption>
-            </figure>
-            <figure class="gallery-card tilt-card reveal">
-              <img src="../assets/images/fb-08.jpg" alt="Candlelit stage decoration detail" width="1440" height="1440" loading="lazy">
-              <figcaption>
-                <h3>Stage detail</h3>
-                <p>Warm styling for entrances, speeches and photos.</p>
-              </figcaption>
-            </figure>
-            <figure class="gallery-card wide tilt-card reveal">
-              <img src="../assets/images/stock-production-sunset.jpg" alt="Outdoor sound and lighting production desk" width="1800" height="1200" loading="lazy">
-              <figcaption>
-                <h3>Outdoor production</h3>
-                <p>Audio and lighting control for open-air crowds.</p>
-              </figcaption>
-            </figure>
-            <figure class="gallery-card tilt-card reveal">
-              <img src="../assets/images/stock-stage-lasers.jpg" alt="Stage lighting beams at a DJ event" width="1800" height="1200" loading="lazy">
-              <figcaption>
-                <h3>Lighting energy</h3>
-                <p>Movement, colour and focus for the main moments.</p>
-              </figcaption>
-            </figure>
-            <figure class="gallery-card tilt-card reveal">
-              <img src="../assets/images/stock-dj-pool.jpg" alt="Outdoor DJ setup with feature lighting" width="1800" height="1200" loading="lazy">
-              <figcaption>
-                <h3>Outdoor DJ mood</h3>
-                <p>Clean placement and feature lighting for open spaces.</p>
-              </figcaption>
-            </figure>
-            <figure class="gallery-card tall tilt-card reveal">
-              <img src="../assets/images/fb-10.jpg" alt="Bright Beats photography identity" width="1215" height="2160" loading="lazy">
-              <figcaption>
-                <h3>Photography</h3>
-                <p>Coverage for wedding, reception and celebration memories.</p>
-              </figcaption>
-            </figure>
-            <figure class="gallery-card tilt-card reveal">
-              <img src="../assets/images/fb-04.jpg" alt="Bright Beats social greeting graphic" width="526" height="935" loading="lazy">
-              <figcaption>
-                <h3>Social moments</h3>
-                <p>Community-minded event content and seasonal updates.</p>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="section-actions reveal">
-            <a class="button button-primary" href="../contact/#quote">Book this look</a>
-            <a class="button button-secondary" href="../services/">View services</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-main">
-        <a class="brand" href="../" aria-label="Bright Beats home">
-          <img src="../assets/images/logo-96.jpg" alt="" width="48" height="48" loading="lazy">
-          <span>
-            <strong>Bright Beats</strong>
-            <small>Sound | Light | DJ | Media</small>
-          </span>
+    <section class="page-hero">
+      <div class="page-hero-bg">
+        <!-- DJ performing with laser lights -->
+        <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=1920&q=80&auto=format&fit=crop" alt="" width="1920" height="1080" loading="eager">
+      </div>
+      <div class="shell page-hero-content">
+        <a href="/" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back to Home
         </a>
-        <div class="footer-contact">
-          <div class="footer-links" aria-label="Footer navigation">
-            <a href="../services/">Services</a>
-            <a href="../gallery/">Gallery</a>
-            <a href="../about/">About</a>
-            <a href="../contact/">Contact</a>
+        <span class="eyebrow" style="margin-top:1.75rem; display:block;">Gallery</span>
+        <h1>The Work,<br><span class="accent-gold">Straight Up</span></h1>
+        <p>Lighting rigs, stage setups, DJ energy and event coverage from real Bright Beats productions. Click any image to enlarge.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="gallery-grid reveal">
+
+          <!-- Wide: Concert crowd with lasers (unique hero shot) -->
+          <div class="gallery-item wide" data-lightbox="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&q=90" data-alt="Concert crowd with laser light show">
+            <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1200&q=80&auto=format&fit=crop" alt="Concert crowd with laser light show — full production event" width="1200" height="530" loading="lazy">
+            <div class="gallery-item-cap">
+              <strong>Full Production</strong>
+              <span>Sound · Light · DJ · LED · Stage · Media</span>
+            </div>
           </div>
-          <div class="footer-social" aria-label="Social links">
-            <a href="https://www.instagram.com/thebrightbeats/">
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
-              Instagram
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61575428434276">
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.6.4-1 1-1Z" fill="currentColor"/></svg>
-              Facebook
-            </a>
+
+          <!-- Tall: Stage decoration / event styling -->
+          <div class="gallery-item tall" data-lightbox="https://images.unsplash.com/photo-1478147427282-58a87a433628?w=900&q=90" data-alt="Elegant event stage decoration">
+            <img src="https://images.unsplash.com/photo-1478147427282-58a87a433628?w=600&q=80&auto=format&fit=crop" alt="Elegant event stage decoration backdrop" width="600" height="1000" loading="lazy">
+            <div class="gallery-item-cap">
+              <strong>Stage Decoration</strong>
+              <span>Ceremony &amp; reception styling</span>
+            </div>
           </div>
+
+          <!-- Standard: DJ controller close-up (fb-09 renamed) -->
+          <div class="gallery-item" data-lightbox="../images/dj-controller-setup.jpg" data-alt="DJ controller and lighting setup">
+            <img src="../images/dj-controller-setup.jpg" alt="DJ controller and event lighting setup" width="600" height="450" loading="lazy">
+            <div class="gallery-item-cap">
+              <strong>DJ Setup</strong>
+              <span>Music control and dance floor energy</span>
+            </div>
+          </div>
+
+          <!-- Standard: Event photography work (fb-10 renamed) -->
+          <div class="gallery-item" data-lightbox="../images/event-photography-coverage.jpg" data-alt="Bright Beats event photography services">
+            <img src="../images/event-photography-coverage.jpg" alt="Bright Beats event photography services" width="600" height="450" loading="lazy">
+            <div class="gallery-item-cap">
+              <strong>Photography Services</strong>
+              <span>Event media and coverage</span>
+            </div>
+          </div>
+
+          <!-- Wide: Outdoor stage at sunset with crowd -->
+          <div class="gallery-item wide" data-lightbox="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=1600&q=90" data-alt="Outdoor stage setup at sunset">
+            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=1200&q=80&auto=format&fit=crop" alt="Outdoor event production stage at golden hour" width="1200" height="530" loading="lazy">
+            <div class="gallery-item-cap">
+              <strong>Outdoor Production</strong>
+              <span>Sound and lighting for large outdoor events</span>
+            </div>
+          </div>
+
+          <!-- Standard: Colourful stage beams / lasers -->
+          <div class="gallery-item" data-lightbox="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=1200&q=90" data-alt="Stage laser and beam lighting display">
+            <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&q=80&auto=format&fit=crop" alt="Stage laser and beam lighting creating atmosphere" width="600" height="450" loading="lazy">
+            <div class="gallery-item-cap">
+              <strong>Laser &amp; Beam Lighting</strong>
+              <span>High-energy atmosphere for dance floors</span>
+            </div>
+          </div>
+
+          <!-- Standard: Outdoor DJ pool-party style setup -->
+          <div class="gallery-item" data-lightbox="https://images.unsplash.com/photo-1574169208507-84376144848b?w=1200&q=90" data-alt="DJ performance with dramatic lighting">
+            <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=600&q=80&auto=format&fit=crop" alt="DJ performing with dramatic stage lighting" width="600" height="450" loading="lazy">
+            <div class="gallery-item-cap">
+              <strong>DJ Performance</strong>
+              <span>Professional setup with feature lighting</span>
+            </div>
+          </div>
+
+          <!-- Tall: LED screen at a corporate or wedding event -->
+          <div class="gallery-item tall" data-lightbox="https://images.unsplash.com/photo-1549451371-64aa98a6f660?w=900&q=90" data-alt="HD LED screen display at an event">
+            <img src="https://images.unsplash.com/photo-1549451371-64aa98a6f660?w=600&q=80&auto=format&fit=crop" alt="HD LED screen display panel at an event" width="600" height="1000" loading="lazy">
+            <div class="gallery-item-cap">
+              <strong>LED Screens</strong>
+              <span>Sharp displays for visuals and greetings</span>
+            </div>
+          </div>
+
+          <!-- Standard: Catering / event atmosphere -->
+          <div class="gallery-item" data-lightbox="https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&q=90" data-alt="Event catering and atmosphere">
+            <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=600&q=80&auto=format&fit=crop" alt="Event catering setup and atmosphere" width="600" height="450" loading="lazy">
+            <div class="gallery-item-cap">
+              <strong>Event Catering</strong>
+              <span>Coordinated food service and atmosphere</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-band">
+      <div class="shell cta-inner reveal">
+        <div>
+          <span class="eyebrow">Like What You See?</span>
+          <h2>Book This Look<br><span class="accent-gold">for Your Event</span></h2>
+          <p>Send us the details — we'll put together a quote for the production setup you need.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="/contact/" class="btn btn-primary">Get a Quote</a>
+          <a href="/services/" class="btn btn-outline">See Services</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <div class="lightbox" hidden>
+    <div class="lightbox-inner">
+      <img src="" alt="" loading="lazy">
+      <button class="lightbox-close" aria-label="Close image">✕</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo-wrap">
+            <img src="../images/logo-wide.png" alt="Bright Beats" loading="lazy">
+          </div>
+          <p class="footer-tagline">Premium event production for Brisbane.</p>
+          <nav class="footer-nav" aria-label="Footer navigation">
+            <a href="/">Home</a>
+            <a href="/services/">Services</a>
+            <a href="/gallery/">Gallery</a>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+          </nav>
+        </div>
+        <div class="footer-right">
           <a href="tel:0432094916">0432 094 916</a>
           <a href="mailto:thebrightbeats@gmail.com">thebrightbeats@gmail.com</a>
+          <a href="https://www.instagram.com/thebrightbeats/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61575428434276" target="_blank" rel="noopener">Facebook</a>
         </div>
       </div>
-    </footer>
-  </body>
+      <div class="footer-bottom">
+        <p>© 2025 Bright Beats. Brisbane, QLD.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js" defer></script>
+</body>
 </html>
