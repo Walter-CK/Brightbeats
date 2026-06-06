@@ -22,11 +22,10 @@
       window.addEventListener('resize', resize, { passive: true });
 
       const N = Math.min(45, Math.floor(window.innerWidth / 26));
-      // Colors from brand palette
       const colors = [
-        'rgba(245,192,39,',   // gold
-        'rgba(232,96,10,',    // orange
-        'rgba(245,192,39,',   // more gold
+        'rgba(245,192,39,',
+        'rgba(232,96,10,',
+        'rgba(245,192,39,',
       ];
 
       const particles = [];
@@ -57,7 +56,6 @@
           ctx.fill();
         }
 
-        // Connecting lines
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
