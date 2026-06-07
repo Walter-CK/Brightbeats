@@ -552,14 +552,14 @@ p { color: var(--text-light); line-height: 1.75; }
 }
 
 /* ═══════════════════════════════════════════
-   PAGE HERO — exactly fills viewport
+   PAGE HERO — fills viewport, back link anchored at top
    ═══════════════════════════════════════════ */
 .page-hero {
   position: relative;
   height: 100svh;
-  min-height: 560px;
+  min-height: 580px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   overflow: hidden;
 }
 .page-hero-bg { position: absolute; inset: 0; z-index: 0; }
@@ -578,36 +578,46 @@ p { color: var(--text-light); line-height: 1.75; }
     radial-gradient(ellipse at 30% 60%, rgba(232,96,10,0.1), transparent 55%);
 }
 
-/* ── Page hero content: matches main hero layout ── */
+/*
+ * Back link sits in its own row anchored just below the nav.
+ * The main content (eyebrow + h1 + p) is centred vertically
+ * in the remaining space — so it always fills the hero regardless
+ * of how much text there is.
+ */
+.page-hero-back {
+  position: relative;
+  z-index: 1;
+  padding-top: calc(var(--nav-h) + 1.25rem);
+  padding-bottom: 0;
+  flex-shrink: 0;
+}
+
 .page-hero-content {
   position: relative;
   z-index: 1;
-  /* Push down from nav, then let content breathe */
-  padding-top: calc(var(--nav-h) + 3.5rem);
-  padding-bottom: 3rem;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  padding-bottom: 4rem;
 }
 
-/* Back link sits high, generous gap before eyebrow */
-.page-hero-content .back-link {
+/* Back link inside the .shell inside .page-hero-back */
+.page-hero-back .back-link {
   display: inline-flex;
-  margin-bottom: 2.75rem;
 }
 
 .page-hero-content .eyebrow {
   display: flex;
-  margin-top: 0;
   margin-bottom: 1.1rem;
 }
 
-/* h1 matches the scale of the main hero */
+/* h1 scales up big enough to fill the hero — minimum 4rem */
 .page-hero h1 {
-  font-size: clamp(3rem, 6.5vw + 0.5rem, 6.5rem);
+  font-size: clamp(4rem, 9vw + 0.5rem, 8rem);
   margin-bottom: 1.25rem;
-  line-height: 0.92;
-  max-width: 16ch;
+  line-height: 0.9;
+  max-width: 18ch;
 }
 
 .page-hero p {
@@ -1098,14 +1108,13 @@ p { color: var(--text-light); line-height: 1.75; }
     margin-bottom: 1.5rem;
   }
 
-  .page-hero { align-items: flex-start; }
-  .page-hero-content {
-    padding-top: calc(var(--nav-h) + 1.5rem);
-    padding-bottom: 1.5rem;
+  /* Page hero mobile */
+  .page-hero-back {
+    padding-top: calc(var(--nav-h) + 0.75rem);
   }
-  .page-hero-content .back-link { margin-bottom: 1.75rem; }
-  .page-hero-content .eyebrow { margin-bottom: 0.85rem; }
-  .page-hero h1 { font-size: clamp(2.4rem, 11vw, 4rem); }
+  .page-hero h1 {
+    font-size: clamp(3rem, 13vw, 5.5rem);
+  }
   .page-hero p { font-size: 0.9rem; }
 
   h2 { font-size: clamp(1.9rem, 7vw, 2.8rem); }
