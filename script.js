@@ -192,30 +192,31 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && !lightbox.hidden) closeLb(); });
   }
 
-  /* ── Contact Form → mailto ── */
+  /* ── Contact Form -> mailto ── */
   const form = document.getElementById('quoteForm');
   if (form) {
     form.addEventListener('submit', e => {
       e.preventDefault();
       const d = new FormData(form);
       const services = d.getAll('services');
+      const none = 'Not specified';
       const lines = [
         `Hi Bright Beats, I'd like to get a quote for an upcoming event.`,
         ``,
-        `Name: ${d.get('name') || '—'}`,
-        `Phone: ${d.get('phone') || '—'}`,
-        `Event type: ${d.get('eventType') || '—'}`,
-        `Date: ${d.get('eventDate') || '—'}`,
-        `Location: ${d.get('location') || '—'}`,
-        `Guest count: ${d.get('guests') || '—'}`,
-        `Budget range: ${d.get('budget') || '—'}`,
-        `Services needed: ${services.length ? services.join(', ') : '—'}`,
-        `Best contact method: ${d.get('contactMethod') || '—'}`,
+        `Name: ${d.get('name') || none}`,
+        `Phone: ${d.get('phone') || none}`,
+        `Event type: ${d.get('eventType') || none}`,
+        `Date: ${d.get('eventDate') || none}`,
+        `Location: ${d.get('location') || none}`,
+        `Guest count: ${d.get('guests') || none}`,
+        `Budget range: ${d.get('budget') || none}`,
+        `Services needed: ${services.length ? services.join(', ') : none}`,
+        `Best contact method: ${d.get('contactMethod') || none}`,
         ``,
         `Additional notes:`,
-        d.get('notes') || '—'
+        d.get('notes') || none
       ];
-      const subject = encodeURIComponent(`Bright Beats Event Quote — ${d.get('eventType') || 'Enquiry'}`);
+      const subject = encodeURIComponent(`Bright Beats Event Quote - ${d.get('eventType') || 'Enquiry'}`);
       const body    = encodeURIComponent(lines.join('\n'));
       window.location.href = `mailto:thebrightbeats@gmail.com?subject=${subject}&body=${body}`;
     });
