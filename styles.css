@@ -510,10 +510,8 @@ p { color: var(--text-light); line-height: 1.75; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* Prevent content from overflowing hero height */
   max-height: calc(100svh - var(--nav-h));
 }
-/* Hero h1: large but constrained so everything fits */
 .hero h1 {
   font-size: clamp(3rem, 7vw + 0.5rem, 7rem);
   line-height: 0.92;
@@ -532,7 +530,6 @@ p { color: var(--text-light); line-height: 1.75; }
 }
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 
-/* ── Hero eyebrow: sits above the giant text ── */
 .hero-eyebrow {
   display: flex;
   align-items: center;
@@ -555,12 +552,12 @@ p { color: var(--text-light); line-height: 1.75; }
 }
 
 /* ═══════════════════════════════════════════
-   PAGE HERO — exactly fills viewport, no bleed
+   PAGE HERO — exactly fills viewport
    ═══════════════════════════════════════════ */
 .page-hero {
   position: relative;
   height: 100svh;
-  min-height: 540px;
+  min-height: 560px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -581,37 +578,40 @@ p { color: var(--text-light); line-height: 1.75; }
     radial-gradient(ellipse at 30% 60%, rgba(232,96,10,0.1), transparent 55%);
 }
 
-/* ── Page hero content: flex-column so back-link and eyebrow each get their own line ── */
+/* ── Page hero content: matches main hero layout ── */
 .page-hero-content {
   position: relative;
   z-index: 1;
-  padding-top: calc(var(--nav-h) + 2rem);
-  padding-bottom: 2rem;
+  /* Push down from nav, then let content breathe */
+  padding-top: calc(var(--nav-h) + 3.5rem);
+  padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-/* Back link: block-level so eyebrow sits on the line below */
+/* Back link sits high, generous gap before eyebrow */
 .page-hero-content .back-link {
   display: inline-flex;
-  margin-bottom: 2rem;
+  margin-bottom: 2.75rem;
 }
 
-/* Eyebrow: block-level, clear gap before h1 */
 .page-hero-content .eyebrow {
   display: flex;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
 }
 
+/* h1 matches the scale of the main hero */
 .page-hero h1 {
-  font-size: clamp(2.6rem, 5.5vw, 5rem);
-  margin-bottom: 1.1rem;
-  line-height: 0.95;
+  font-size: clamp(3rem, 6.5vw + 0.5rem, 6.5rem);
+  margin-bottom: 1.25rem;
+  line-height: 0.92;
+  max-width: 16ch;
 }
+
 .page-hero p {
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 1.2vw + 0.2rem, 1.1rem);
   color: var(--text-light);
   max-width: 520px;
   margin: 0;
@@ -1079,19 +1079,14 @@ p { color: var(--text-light); line-height: 1.75; }
     color: #0a0a0a !important;
   }
 
-  /* Hero mobile: eyebrow near top, h1 dominates but fits */
-  .hero {
-    align-items: flex-start;
-  }
+  .hero { align-items: flex-start; }
   .hero-content {
     padding-top: calc(var(--nav-h) + 1.5rem);
     padding-bottom: 1.5rem;
     justify-content: flex-start;
     max-height: none;
   }
-  .hero-eyebrow {
-    margin-bottom: 0.6rem;
-  }
+  .hero-eyebrow { margin-bottom: 0.6rem; }
   .hero h1 {
     font-size: clamp(3rem, 16vw, 5rem);
     line-height: 0.9;
@@ -1103,21 +1098,14 @@ p { color: var(--text-light); line-height: 1.75; }
     margin-bottom: 1.5rem;
   }
 
-  /* Page hero mobile: stack vertically, plenty of space */
-  .page-hero {
-    align-items: flex-start;
-  }
+  .page-hero { align-items: flex-start; }
   .page-hero-content {
-    padding-top: calc(var(--nav-h) + 1.25rem);
+    padding-top: calc(var(--nav-h) + 1.5rem);
     padding-bottom: 1.5rem;
   }
-  .page-hero-content .back-link {
-    margin-bottom: 1.5rem;
-  }
-  .page-hero-content .eyebrow {
-    margin-bottom: 0.85rem;
-  }
-  .page-hero h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+  .page-hero-content .back-link { margin-bottom: 1.75rem; }
+  .page-hero-content .eyebrow { margin-bottom: 0.85rem; }
+  .page-hero h1 { font-size: clamp(2.4rem, 11vw, 4rem); }
   .page-hero p { font-size: 0.9rem; }
 
   h2 { font-size: clamp(1.9rem, 7vw, 2.8rem); }
