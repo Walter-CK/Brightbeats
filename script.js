@@ -151,10 +151,18 @@
       ham.setAttribute('aria-expanded', String(!open));
       navL.classList.toggle('open', !open);
     });
+    // Close drawer when a nav link is tapped
     navL.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       ham.setAttribute('aria-expanded', 'false');
       navL.classList.remove('open');
     }));
+    // Close drawer on outside tap
+    document.addEventListener('click', e => {
+      if (!nav.contains(e.target) && navL.classList.contains('open')) {
+        ham.setAttribute('aria-expanded', 'false');
+        navL.classList.remove('open');
+      }
+    });
   }
 
   // Active nav link
