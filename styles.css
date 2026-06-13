@@ -35,7 +35,6 @@ html {
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: var(--gold-mid) transparent;
-  /* Prevent Safari overscroll from showing white above nav */
   background-color: var(--bg);
 }
 html::-webkit-scrollbar { width: 5px; }
@@ -85,13 +84,13 @@ body::before {
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(245, 192, 39, 0.1);
   transition: background 0.3s, border-color 0.3s;
-  /* Extend upward so Safari overscroll bounce shows nav colour, not page bg */
-  box-shadow: 0 -200px 0 200px rgba(10, 10, 10, 0.92);
+  /* FIX: extend far upward so Safari overscroll bounce never shows page bg above nav */
+  box-shadow: 0 -9999px 0 9999px rgba(10, 10, 10, 0.92);
 }
 .site-nav.scrolled {
   background: rgba(10, 10, 10, 0.98);
   border-color: var(--border);
-  box-shadow: 0 -200px 0 200px rgba(10, 10, 10, 0.98);
+  box-shadow: 0 -9999px 0 9999px rgba(10, 10, 10, 0.98);
 }
 
 .nav-inner {
@@ -190,6 +189,11 @@ body::before {
   border: 1px solid var(--border);
   margin-left: auto;
   flex-shrink: 0;
+  /* FIX: ensure no residual content around spans */
+  overflow: hidden;
+  padding: 0;
+  line-height: 0;
+  font-size: 0;
 }
 .nav-hamburger span {
   display: block;
@@ -197,13 +201,22 @@ body::before {
   background: var(--text);
   border-radius: 99px;
   transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.2s;
+  flex-shrink: 0;
+  pointer-events: none;
 }
-.nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+/* FIX: clean X transform — hide middle bar, cross the other two */
+.nav-hamburger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-hamburger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-hamburger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 /* ── Mobile nav drawer ── */
-/* The open state for mobile nav — defined here, overridden below at the breakpoint */
 .nav-links.open {
   display: flex !important;
 }
@@ -485,7 +498,9 @@ p { color: var(--text-light); line-height: 1.75; }
 .cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 
 /* ═══════════════════════════════════════════
-   HERO — fills full viewport, no scroll needed
+   HERO — fills full viewport
+   FIX: use justify-content: center so content
+   sits in the middle of the viewport on mobile
    ═══════════════════════════════════════════ */
 .hero {
   position: relative;
@@ -518,11 +533,12 @@ p { color: var(--text-light); line-height: 1.75; }
 .hero-content {
   position: relative;
   z-index: 1;
-  padding-top: var(--nav-h);
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-height: calc(100svh - var(--nav-h));
+  /* Push content down past the nav bar */
+  padding-top: var(--nav-h);
 }
 .hero h1 {
   font-size: clamp(3rem, 7vw + 0.5rem, 7rem);
@@ -590,7 +606,7 @@ p { color: var(--text-light); line-height: 1.75; }
     radial-gradient(ellipse at 30% 60%, rgba(232,96,10,0.1), transparent 55%);
 }
 
-/* Back link row — consistent vertical offset from nav across all pages */
+/* Back link row */
 .page-hero-back {
   position: relative;
   z-index: 1;
@@ -937,7 +953,7 @@ p { color: var(--text-light); line-height: 1.75; }
 /* ── About story ── */
 .about-story p { color: var(--text-light); font-size: 1.05rem; line-height: 1.85; }
 
-/* ── About approach grid — avoid inline style on mobile ── */
+/* ── About approach grid ── */
 .about-approach-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 0.5fr);
@@ -1058,7 +1074,6 @@ p { color: var(--text-light); line-height: 1.75; }
   .team-grid, .brief-grid, .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .cta-inner { grid-template-columns: 1fr; }
   .section-head { grid-template-columns: 1fr; }
-  /* About approach grid collapses to single column */
   .about-approach-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
 
@@ -1078,7 +1093,7 @@ p { color: var(--text-light); line-height: 1.75; }
   .nav-logo-text { display: none; }
   .nav-logo img { height: 32px; }
 
-  /* ── Mobile nav drawer — slides down from nav bar ── */
+  /* ── Mobile nav drawer ── */
   .nav-links.open {
     display: flex !important;
     flex-direction: column;
@@ -1086,7 +1101,6 @@ p { color: var(--text-light); line-height: 1.75; }
     top: var(--nav-h);
     left: 0;
     right: 0;
-    /* Extend below with enough height, auto-size to content */
     background: rgba(8, 8, 8, 0.98);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
@@ -1094,7 +1108,6 @@ p { color: var(--text-light); line-height: 1.75; }
     padding: 0.75rem 1rem 1.25rem;
     z-index: 899;
     gap: 0.15rem;
-    /* Subtle entrance animation */
     animation: navSlideDown 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
@@ -1103,7 +1116,6 @@ p { color: var(--text-light); line-height: 1.75; }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Nav links in drawer */
   .nav-links.open a {
     display: flex;
     align-items: center;
@@ -1121,7 +1133,6 @@ p { color: var(--text-light); line-height: 1.75; }
     background: var(--gold-dim);
   }
 
-  /* Get a Quote CTA in drawer */
   .nav-links.open .nav-cta {
     display: flex !important;
     margin-left: 0 !important;
@@ -1135,18 +1146,20 @@ p { color: var(--text-light); line-height: 1.75; }
     font-weight: 700 !important;
   }
 
-  /* ── Home hero ── */
+  /* ── FIX: Hero vertically centred on mobile ── */
   .hero {
     height: 100svh;
     min-height: 560px;
-    align-items: flex-start;
+    align-items: center;
   }
   .hero-content {
-    padding-top: calc(var(--nav-h) + 2rem);
-    padding-bottom: 2rem;
+    /* Remove padding-top push — use padding to offset nav but keep content centred */
+    padding-top: 0;
+    padding-bottom: 0;
     justify-content: center;
-    max-height: none;
-    height: 100%;
+    /* Shift content block down by half the nav height so it's optically centred
+       accounting for the nav bar occupying the top */
+    margin-top: calc(var(--nav-h) / 2);
   }
   .hero-eyebrow { margin-bottom: 0.75rem; }
   .hero h1 {
@@ -1167,7 +1180,6 @@ p { color: var(--text-light); line-height: 1.75; }
     min-height: 560px;
   }
   .page-hero-back {
-    /* Consistent offset: nav height + 1.25rem across all pages */
     padding-top: calc(var(--nav-h) + 1.25rem);
   }
   .page-hero-content {
