@@ -539,6 +539,8 @@ p { color: var(--text-light); line-height: 1.75; }
   justify-content: center;
   /* Push content down past the nav bar */
   padding-top: var(--nav-h);
+  /* Desktop: breathing room on the left */
+  padding-left: clamp(2rem, 5vw, 5rem);
 }
 .hero h1 {
   font-size: clamp(3rem, 7vw + 0.5rem, 7rem);
@@ -1156,6 +1158,7 @@ p { color: var(--text-light); line-height: 1.75; }
     /* Remove padding-top push — use padding to offset nav but keep content centred */
     padding-top: 0;
     padding-bottom: 0;
+    padding-left: 0;
     justify-content: center;
     /* Shift content block down by half the nav height so it's optically centred
        accounting for the nav bar occupying the top */
