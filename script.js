@@ -145,24 +145,55 @@
     }, { passive: true });
   }
 
+  /* ── Nav drawer overlay (for outside-click to close) ── */
+  // Create a full-screen transparent overlay that sits behind the drawer
+  // but above the page content. Tapping it closes the drawer cleanly.
+  let navOverlay = null;
+
+  function createNavOverlay() {
+    if (navOverlay) return;
+    navOverlay = document.createElement('div');
+    navOverlay.style.cssText = [
+      'position:fixed',
+      'inset:0',
+      'z-index:898',   // just below the drawer (899) and nav (900)
+      'background:transparent',
+      'display:none',
+    ].join(';');
+    navOverlay.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(navOverlay);
+    navOverlay.addEventListener('click', closeNav);
+    navOverlay.addEventListener('touchstart', closeNav, { passive: true });
+  }
+
+  function openNav() {
+    ham.setAttribute('aria-expanded', 'true');
+    navL.classList.add('open');
+    if (navOverlay) navOverlay.style.display = 'block';
+  }
+
+  function closeNav() {
+    ham.setAttribute('aria-expanded', 'false');
+    navL.classList.remove('open');
+    if (navOverlay) navOverlay.style.display = 'none';
+  }
+
   if (ham && navL) {
+    createNavOverlay();
+
     ham.addEventListener('click', () => {
-      const open = ham.getAttribute('aria-expanded') === 'true';
-      ham.setAttribute('aria-expanded', String(!open));
-      navL.classList.toggle('open', !open);
-    });
-    // Close drawer when a nav link is tapped
-    navL.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      ham.setAttribute('aria-expanded', 'false');
-      navL.classList.remove('open');
-    }));
-    // Close drawer on outside tap
-    document.addEventListener('click', e => {
-      if (!nav.contains(e.target) && navL.classList.contains('open')) {
-        ham.setAttribute('aria-expanded', 'false');
-        navL.classList.remove('open');
+      const isOpen = ham.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeNav();
+      } else {
+        openNav();
       }
     });
+
+    // Close drawer when a nav link is tapped
+    navL.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      closeNav();
+    }));
   }
 
   // Active nav link
